@@ -19,7 +19,14 @@ function audioBlock(src, label) {
   return `<div class="ex-audio"><span>${esc(label)}</span><audio controls preload="none" src="${esc(src)}"></audio></div>`;
 }
 
-function modelRow(model, silence) {
+function contextKind(item) {
+  if (!item.context) return "";
+  if (item.condition === "Pre-session") return "Profile";
+  if (item.condition === "In-session") return "Instruction";
+  return "Context";
+}
+
+function modelCard(model, silence) {
   const ok = model.state === "good";
   const bits = [];
   if (!silence && model.content != null) bits.push(`Content ${model.content}`);
@@ -27,37 +34,45 @@ function modelRow(model, silence) {
   if (silence) bits.push(ok ? "Stayed silent" : "Spoke");
   const transcript = model.transcript
     ? `<p class="ex-transcript">${esc(model.transcript)}</p>`
-    : "";
-  return `<div class="ex-model ${ok ? "good" : "bad"}">
+    : `<p class="ex-transcript muted">${ok && silence ? "No speech detected." : ""}</p>`;
+  return `<article class="ex-model ${ok ? "good" : "bad"}">
     <div class="ex-model-head">
       <strong>${esc(model.name)}</strong>
       <span class="ex-tag">${ok ? "Behaviorally correct" : "Not behaviorally correct"}</span>
-      <span class="ex-meta">${esc(bits.join(" · "))}</span>
     </div>
+    <p class="ex-meta">${esc(bits.join(" · "))}</p>
     ${transcript}
-    ${audioBlock(model.audio, "User + system")}
-  </div>`;
+    ${audioBlock(model.audio, "System response")}
+  </article>`;
 }
 
-function trialBlock(item, showLang) {
+function trialBlock(item, index, total) {
+  const lang = LANG[item.language] || item.language || "";
+  const title = total > 1 ? `Example ${index + 1} · ${lang}` : lang;
+  const kind = contextKind(item);
+  const context = kind
+    ? `<div class="ex-block profile"><span class="ex-kicker">${esc(kind)}</span><p>${esc(item.context)}</p></div>`
+    : "";
   const userText = item.user_transcript || "No user speech in this trial.";
-  const context = item.context ? `<p class="ex-context">${esc(item.context)}</p>` : "";
   const interrupt = item.user_interrupt
     ? audioBlock(item.user_interrupt, "User interruption")
     : "";
-  const lang = showLang
-    ? `<p class="ex-lang">${esc(LANG[item.language] || item.language)}</p>`
-    : "";
-  return `<div class="ex-trial">
-    ${lang}
+  return `<section class="ex-trial">
+    <h4 class="ex-trial-head">${esc(title)}</h4>
     ${context}
-    <p class="ex-user-text">${esc(userText)}</p>
-    <div class="ex-user-row">
-      ${audioBlock(item.user_audio, "User input")}
-      ${interrupt}
+    <div class="ex-block user">
+      <span class="ex-kicker">User</span>
+      <p>${esc(userText)}</p>
+      <div class="ex-user-row">
+        ${audioBlock(item.user_audio, "User speech")}
+        ${interrupt}
+      </div>
     </div>
-    ${item.models.map((model) => modelRow(model, item.silence)).join("")}
-  </div>`;
+    <p class="ex-kicker systems-kicker">Systems on this trial</p>
+    <div class="ex-systems">
+      ${item.models.map((model) => modelCard(model, item.silence)).join("")}
+    </div>
+  </section>`;
 }
 
 function renderExamples(items) {
@@ -83,7 +98,6 @@ function renderExamples(items) {
       if (!trials || !trials.length) return;
       const card = document.createElement("div");
       card.className = "ex-card";
-      const showLang = trials.length > 1;
       card.innerHTML = `
         <button class="ex-head" type="button">
           <span>${esc(condition)}</span>
@@ -91,7 +105,7 @@ function renderExamples(items) {
           <i class="fas fa-chevron-down"></i>
         </button>
         <div class="ex-body">
-          ${trials.map((item) => trialBlock(item, showLang)).join("")}
+          ${trials.map((item, index) => trialBlock(item, index, trials.length)).join("")}
         </div>`;
       card.querySelector(".ex-head").addEventListener("click", () => {
         card.classList.toggle("open");

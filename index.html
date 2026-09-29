@@ -31,8 +31,8 @@
         </p>
       </div>
       <div class="hero-links">
-        <a href="https://github.com/Alita-xky/DuplexAct-Bench" class="btn" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i> Code &amp; Data
+        <a href="DuplexAct-Bench.pdf" class="btn" target="_blank" rel="noopener">
+          <i class="fas fa-file-pdf"></i> Paper
         </a>
         <a href="#examples" class="btn btn-outline"><i class="fas fa-headphones"></i> Audio Examples</a>
         <a href="#results" class="btn btn-accent"><i class="fas fa-chart-bar"></i> Results</a>
@@ -176,9 +176,10 @@
 
       <h3 class="table-title">Content and Timing</h3>
       <p class="section-lead">
-        <em>C</em> is the mean Content score (0–5). <em>L</em> is the mean latency in seconds.
+        <em>C</em> is the mean Content score (0–5). <em>L</em> is the mean latency in seconds. BAS is the Backchannel Alignment Score.
+        Higher <em>C</em> and BAS are better; lower <em>L</em> is better.
         For User Interruption, both metrics use valid trials only. Active Silence is omitted because it is scored only by its silence criterion above.
-        Arrows show the preferred direction. Bold marks the best reported value in each column.
+        Bold marks the best reported value in each column.
       </p>
       <div class="table-wrap">
         <table class="demo-table bcr-table" aria-label="Content and timing results">
@@ -189,29 +190,31 @@
               <th colspan="2">User Interruption</th>
               <th colspan="2">Interruption Resistance</th>
               <th colspan="2">Proactive Initiation</th>
+              <th colspan="2">Agent Backchannel</th>
             </tr>
             <tr>
               <th><em>C</em> ↑</th><th><em>L</em> (s) ↓</th>
               <th><em>C</em> ↑</th><th><em>L</em> (s) ↓</th>
               <th><em>C</em> ↑</th><th><em>L</em> (s) ↓</th>
               <th><em>C</em> ↑</th><th><em>L</em> (s) ↓</th>
+              <th><em>C</em> ↑</th><th>BAS ↑</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="group"><td colspan="9">Locally deployed systems</td></tr>
-            <tr><td>Freeze-Omni</td><td>1.66</td><td>9.67</td><td>1.56</td><td>21.22</td><td>2.69</td><td>15.98</td><td>0.70</td><td>14.03</td></tr>
-            <tr><td>MiniCPM-o 4.5</td><td>2.32</td><td>9.26</td><td>1.97</td><td>19.15</td><td>3.13</td><td class="best">13.60</td><td>0.70</td><td>13.98</td></tr>
-            <tr><td>Moshi</td><td>1.15</td><td>10.41</td><td>1.68</td><td>17.76</td><td>1.47</td><td>16.65</td><td class="best">2.01</td><td>11.01</td></tr>
-            <tr><td>PersonaPlex</td><td>2.05</td><td>9.86</td><td>2.09</td><td>15.29</td><td>1.79</td><td>16.74</td><td>1.96</td><td>12.78</td></tr>
-            <tr><td>VITA-1.5</td><td>1.70</td><td>9.60</td><td>1.29</td><td>20.81</td><td>1.91</td><td>19.54</td><td>0.48</td><td class="best">10.05</td></tr>
-            <tr><td>Raon-SpeechChat</td><td>2.26</td><td>10.20</td><td>1.97</td><td>15.53</td><td>2.40</td><td>17.20</td><td>1.98</td><td>11.13</td></tr>
-            <tr><td>DuplexCascade</td><td>1.34</td><td>9.83</td><td>1.22</td><td>21.82</td><td>1.38</td><td>23.09</td><td>0.49</td><td class="best">10.05</td></tr>
-            <tr class="group"><td colspan="9">Systems accessed through remote APIs</td></tr>
-            <tr><td>Nemotron 3 VoiceChat</td><td>2.61</td><td class="best">9.12</td><td>1.36</td><td>21.46</td><td>1.31</td><td>16.47</td><td>0.59</td><td>14.03</td></tr>
-            <tr><td>Qwen3.5-Omni</td><td>3.71</td><td>9.42</td><td>2.80</td><td>16.38</td><td>3.55</td><td>15.03</td><td>0.88</td><td>13.82</td></tr>
-            <tr><td>Grok Voice</td><td>3.63</td><td>10.18</td><td>1.77</td><td>21.09</td><td>3.11</td><td>15.62</td><td>0.69</td><td>14.03</td></tr>
-            <tr><td>GPT Realtime 2.1</td><td class="best">4.12</td><td>10.08</td><td>2.76</td><td>15.03</td><td class="best">4.05</td><td>15.91</td><td>0.66</td><td>14.03</td></tr>
-            <tr><td>Gemini 2.5 Native Audio</td><td>3.94</td><td>9.89</td><td class="best">2.98</td><td class="best">14.67</td><td>3.65</td><td>14.51</td><td>0.66</td><td>14.03</td></tr>
+            <tr class="group"><td colspan="11">Locally deployed systems</td></tr>
+            <tr><td>Freeze-Omni</td><td>1.66</td><td>9.67</td><td>1.56</td><td>21.22</td><td>2.69</td><td>15.98</td><td>0.70</td><td>14.03</td><td>1.09</td><td>0.005</td></tr>
+            <tr><td>MiniCPM-o 4.5</td><td>2.32</td><td>9.26</td><td>1.97</td><td>19.15</td><td>3.13</td><td class="best">13.60</td><td>0.70</td><td>13.98</td><td>1.59</td><td>0.054</td></tr>
+            <tr><td>Moshi</td><td>1.15</td><td>10.41</td><td>1.68</td><td>17.76</td><td>1.47</td><td>16.65</td><td class="best">2.01</td><td>11.01</td><td>1.24</td><td class="best">0.108</td></tr>
+            <tr><td>PersonaPlex</td><td>2.05</td><td>9.86</td><td>2.09</td><td>15.29</td><td>1.79</td><td>16.74</td><td>1.96</td><td>12.78</td><td>1.04</td><td>0.097</td></tr>
+            <tr><td>VITA-1.5</td><td>1.70</td><td>9.60</td><td>1.29</td><td>20.81</td><td>1.91</td><td>19.54</td><td>0.48</td><td class="best">10.05</td><td>1.21</td><td>0.042</td></tr>
+            <tr><td>Raon-SpeechChat</td><td>2.26</td><td>10.20</td><td>1.97</td><td>15.53</td><td>2.40</td><td>17.20</td><td>1.98</td><td>11.13</td><td>2.11</td><td>0.052</td></tr>
+            <tr><td>DuplexCascade</td><td>1.34</td><td>9.83</td><td>1.22</td><td>21.82</td><td>1.38</td><td>23.09</td><td>0.49</td><td class="best">10.05</td><td>1.24</td><td>0.024</td></tr>
+            <tr class="group"><td colspan="11">Systems accessed through remote APIs</td></tr>
+            <tr><td>Nemotron 3 VoiceChat</td><td>2.61</td><td class="best">9.12</td><td>1.36</td><td>21.46</td><td>1.31</td><td>16.47</td><td>0.59</td><td>14.03</td><td>1.40</td><td>0.041</td></tr>
+            <tr><td>Qwen3.5-Omni</td><td>3.71</td><td>9.42</td><td>2.80</td><td>16.38</td><td>3.55</td><td>15.03</td><td>0.88</td><td>13.82</td><td class="best">2.46</td><td>0.040</td></tr>
+            <tr><td>Grok Voice</td><td>3.63</td><td>10.18</td><td>1.77</td><td>21.09</td><td>3.11</td><td>15.62</td><td>0.69</td><td>14.03</td><td>0.76</td><td>0.002</td></tr>
+            <tr><td>GPT Realtime 2.1</td><td class="best">4.12</td><td>10.08</td><td>2.76</td><td>15.03</td><td class="best">4.05</td><td>15.91</td><td>0.66</td><td>14.03</td><td>1.92</td><td>0.032</td></tr>
+            <tr><td>Gemini 2.5 Native Audio</td><td>3.94</td><td>9.89</td><td class="best">2.98</td><td class="best">14.67</td><td>3.65</td><td>14.51</td><td>0.66</td><td>14.03</td><td>0.98</td><td>0.003</td></tr>
 
           </tbody>
         </table>
@@ -245,8 +248,7 @@
     <section class="section" id="examples">
       <h2>Audio Examples</h2>
       <p class="section-lead">
-        Examples are grouped by behavior and condition: Pre-session, In-session, and No-explicit.
-        Each example plays the shared user input, one behaviorally correct system, and two systems that miss.
+        Each box is one trial. The profile or instruction sits above the user’s turn, and the three system responses sit together underneath.
       </p>
       <div id="examples-root"></div>
     </section>
