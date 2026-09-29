@@ -68,7 +68,7 @@ code {
 
 .hero-inner {
   position: relative;
-  max-width: 920px;
+  max-width: 1120px;
   margin: 0 auto;
 }
 
@@ -84,10 +84,11 @@ code {
 }
 
 .subtitle {
-  font-size: 1.15rem;
+  font-size: 1.02rem;
   opacity: 0.95;
   margin: 0 0 0.75rem;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .tagline {
@@ -1016,14 +1017,18 @@ code {
 }
 
 .fig-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem 2rem;
-  align-items: start;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.5rem;
+  margin: 0 auto;
+  max-width: 860px;
 }
 
 .fig-row figure {
   margin: 0;
+  flex: 0 1 380px;
+  max-width: 380px;
 }
 
 .fig-row img {
@@ -1035,16 +1040,22 @@ code {
 }
 
 .fig-row figcaption {
-  margin: 0.7rem 0 0;
-  font-size: 0.9rem;
+  margin: 0.65rem 0 0;
+  font-size: 0.84rem;
   font-style: italic;
   color: #64748b;
   line-height: 1.45;
+  text-align: left;
 }
 
 @media (max-width: 800px) {
+  .subtitle {
+    white-space: normal;
+  }
+
   .fig-row {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -1104,6 +1115,15 @@ code {
 .bcr-table .best {
   font-weight: 700;
   color: var(--primary-dark);
+}
+
+.table-title {
+  margin: 1.75rem 0 0.55rem;
+  font-size: 1.15rem;
+}
+
+.section h2 + .table-title {
+  margin-top: 0.15rem;
 }
 
 .behavior-grid {
