@@ -1,61 +1,452 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DuplexAct-Bench</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 80px auto;
-      padding: 0 24px;
-      line-height: 1.6;
-      color: #222;
-    }
-    h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-    .subtitle {
-      font-size: 22px;
-      color: #555;
-    }
-    .authors {
-      margin-top: 28px;
-      font-size: 18px;
-    }
-    .coming {
-      margin-top: 50px;
-      padding: 20px;
-      background: #f5f5f5;
-      border-radius: 10px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DuplexAct-Bench: Broadening Full-Duplex Speech Evaluation toward Proactive Interaction</title>
+  <meta name="description" content="DuplexAct-Bench is a bilingual benchmark that evaluates six real-time interaction behaviors across Pre-session, In-session, and No-explicit conditions. 1,290 English and Chinese streaming trials, 12 full-duplex systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="report-badge">ICASSP 2027</p>
+      <h1>DuplexAct-Bench</h1>
+      <p class="subtitle">Broadening Full-Duplex Speech Evaluation toward Proactive Interaction across Diverse Behavioral Requirements</p>
+      <p class="tagline">
+        Evaluating not only <em>what</em> agents say, but <em>when</em>, <em>whether</em>, and <em>how</em> they interrupt, yield, hold the floor, stay silent, initiate, or backchannel.
+      </p>
+      <div class="authors">
+        <div class="author-block">
+          Keyue Xing<sup>1,2,†</sup>,
+          Wentao Ding<sup>1,†</sup>,
+          Mengmeng Wang<sup>1</sup>,
+          Wenming Tu<sup>1,3</sup>,
+          Zilong Zheng<sup>1,*</sup>,
+          Yipeng Kang<sup>1,*</sup>
+        </div>
+        <p class="affil-list">
+          <sup>1</sup> State Key Laboratory of General Artificial Intelligence, BIGAI, China<br />
+          <sup>2</sup> Peking University, China<br />
+          <sup>3</sup> X-LANCE Lab, Shanghai Jiao Tong University, China
+        </p>
+        <p class="author-note"><sup>†</sup>Equal contribution. <sup>*</sup>Corresponding authors.</p>
+      </div>
+      <div class="hero-links">
+        <a href="https://github.com/Alita-xky/DuplexAct-Bench" class="btn" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> Code &amp; Data
+        </a>
+        <a href="#taxonomy" class="btn btn-outline"><i class="fas fa-sitemap"></i> 6×30 Taxonomy</a>
+        <a href="#results" class="btn btn-accent"><i class="fas fa-chart-bar"></i> Results</a>
+      </div>
+    </div>
+  </header>
 
-  <h1>DuplexAct-Bench</h1>
+  <main class="container">
+    <section class="section" id="abstract">
+      <h2>Abstract</h2>
+      <p>
+        Existing full-duplex speech benchmarks cover only subsets of real-time interaction behaviors, often under limited contextual conditions.
+        We introduce <strong>DuplexAct-Bench</strong>, a bilingual benchmark that systematically covers six complementary behaviors, from interruption and yielding to proactive initiation, active silence, and backchanneling, across <strong>Pre-session</strong>, <strong>In-session</strong>, and <strong>No-explicit</strong> conditions.
+        Across <strong>1,290 English and Chinese streaming trials</strong>, we evaluate <strong>12 full-duplex speech systems</strong> on both <em>Timing</em> and <em>Content</em>.
+      </p>
+      <p>
+        Results reveal substantial variation across behaviors, conditions, and systems, as well as frequent mismatches between semantic quality and behavioral timing.
+        These findings show that current systems remain far from robustly managing when, whether, and how to participate as real-time interaction unfolds.
+      </p>
+    </section>
 
-  <div class="subtitle">
-    When to Interrupt, Yield, Hold the Floor, Stay Silent,
-    Initiate, or Backchannel
-  </div>
+    <section class="section" id="comparison">
+      <h2>Comparison with Existing Benchmarks</h2>
+      <p class="section-lead">
+        DuplexAct-Bench is the only benchmark in this comparison that systematically covers all six behaviors across their applicable contextual conditions.
+        <span class="cmp-legend">
+          <span class="cmp-yes">✓</span> systematic &nbsp;
+          <span class="cmp-partial">○</span> partial / related &nbsp;
+          <span class="cmp-no">✗</span> no explicit evaluation
+        </span>
+      </p>
+      <div class="table-wrap">
+        <table class="demo-table cmp-table" aria-label="Comparison of full-duplex benchmarks">
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>Agent Interruption</th>
+              <th>User Interruption</th>
+              <th>Interruption Resistance</th>
+              <th>Active Silence</th>
+              <th>Proactive Initiation</th>
+              <th>Agent Backchannel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Talking Turns</td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-partial">○</span></td></tr>
+            <tr><td>Full-Duplex-Bench v1</td><td><span class="cmp-no">✗</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-partial">○</span></td></tr>
+            <tr><td>Full-Duplex-Bench v1.5</td><td><span class="cmp-no">✗</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td></tr>
+            <tr><td>FD-Bench</td><td><span class="cmp-partial">○</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td></tr>
+            <tr><td>FLEXI</td><td><span class="cmp-partial">○</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-partial">○</span></td></tr>
+            <tr><td>HumDial-FD</td><td><span class="cmp-no">✗</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td></tr>
+            <tr><td>Full-Duplex-Bench v2</td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td></tr>
+            <tr><td>Full-Duplex-Bench v3</td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td></tr>
+            <tr><td>DuplexSLA</td><td><span class="cmp-no">✗</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-no">✗</span></td><td><span class="cmp-no">✗</span></td></tr>
+            <tr><td>DSB-IFEval</td><td><span class="cmp-partial">○</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td><td><span class="cmp-partial">○</span></td></tr>
+            <tr class="ours"><td>DuplexAct-Bench</td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-yes">✓</span></td><td><span class="cmp-yes">✓</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="section-lead" style="margin-top: 0.9rem;">
+        ✓ denotes systematic coverage across the applicable contextual conditions;
+        ○ denotes coverage under a subset of those conditions, or closely related coverage;
+        ✗ denotes no explicit evaluation.
+      </p>
+    </section>
 
-  <div class="authors">
-    Keyue Xing, Wentao Ding, Mengmeng Wang,
-    Wenming Tu, Zilong Zheng, Yipeng Kang
-  </div>
+    <section class="section" id="overview">
+      <h2>Benchmark Overview</h2>
+      <div class="behavior-grid">
+        <article class="behavior-card">
+          <h3>Agent Interruption</h3>
+          <p>Intervene during an ongoing user turn when the context calls for it.</p>
+          <span class="trials">240 trials</span>
+        </article>
+        <article class="behavior-card">
+          <h3>User Interruption</h3>
+          <p>Yield the floor when the user interrupts, then respond to that interruption.</p>
+          <span class="trials">240 trials</span>
+        </article>
+        <article class="behavior-card">
+          <h3>Interruption Resistance</h3>
+          <p>Keep an ongoing activity going despite non-disruptive user input.</p>
+          <span class="trials">280 trials</span>
+        </article>
+        <article class="behavior-card">
+          <h3>Active Silence</h3>
+          <p>Withhold speech when silence is the appropriate participation.</p>
+          <span class="trials">160 trials</span>
+        </article>
+        <article class="behavior-card">
+          <h3>Proactive Initiation</h3>
+          <p>Start speaking without an explicit request from the user.</p>
+          <span class="trials">160 trials</span>
+        </article>
+        <article class="behavior-card">
+          <h3>Agent Backchannel</h3>
+          <p>Give brief floor-preserving responses during the user’s turn.</p>
+          <span class="trials">210 trials</span>
+        </article>
+      </div>
+      <div class="overview-layout">
+        <figure class="paper-figure">
+          <img src="images/taxonomy.png" alt="Behavior taxonomy and 30 interaction scenarios in DuplexAct-Bench" />
+          <figcaption>
+            <strong>Behavior taxonomy.</strong>
+            The inner ring shows six behavior families; the outer ring lists their interaction scenarios.
+            Numbers on each family are trial counts, totaling 1,290.
+            Arc colors mark contextual conditions: red for Pre-session, blue for In-session, and black for No-explicit.
+          </figcaption>
+        </figure>
+        <figure class="paper-figure">
+          <img src="images/behaviors.jpeg" alt="Representative examples of the six interaction behaviors" />
+          <figcaption>
+            Representative examples of the six behaviors under different contextual conditions.
+            Blue and red waveforms denote user and agent speech. Peach shading marks the behavior-specific latency used for Timing.
+          </figcaption>
+        </figure>
+        <div class="stats-grid stats-grid-inline">
+          <div class="stat-card"><div class="stat-num">1,290</div><div class="stat-label">Bilingual Trials</div></div>
+          <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Behaviors</div></div>
+          <div class="stat-card"><div class="stat-num">30</div><div class="stat-label">Scenarios</div></div>
+          <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">Systems</div></div>
+        </div>
+      </div>
+      <p class="section-lead" style="margin-top: 1.25rem;">
+        Each behavior is evaluated under the contextual conditions that apply to it.
+        <strong>Pre-session</strong> requirements come from a persistent profile before the interaction.
+        <strong>In-session</strong> requirements are stated during the stream.
+        <strong>No-explicit</strong> trials give no behavioral instruction; the appropriate behavior has to be inferred from the semantic or acoustic context.
+        User audio is streamed in about 80&nbsp;ms chunks at real-time factor 1.0. English and Chinese trials follow the same construction protocol.
+      </p>
+    </section>
 
-  <p>
-    State Key Laboratory of General Artificial Intelligence, BIGAI
-  </p>
+    <section class="section" id="taxonomy">
+      <h2>Benchmark Taxonomy: 6 Behaviors × 30 Scenarios</h2>
+      <p class="section-lead">
+        Scenario names follow the taxonomy figure. Arc colors mark Pre-session (red), In-session (blue), and No-explicit (black).
+        Trial counts are reported per behavior. Per-scenario speech examples are left for a later update.
+      </p>
+      <div class="table-wrap taxonomy-table-wrap">
+        <table class="demo-table taxonomy-table" aria-label="DuplexAct-Bench taxonomy">
+          <thead>
+            <tr>
+              <th>Behavior</th>
+              <th>Trials</th>
+              <th>Scenario</th>
+              <th>Condition</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dim-cell" rowspan="7">Agent Interruption</td>
+              <td class="trials-cell" rowspan="7">240</td>
+              <td>Debate</td>
+              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
+            </tr>
+            <tr><td>Professional Consultation</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
+            <tr><td>Review / Oversight</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
+            <tr><td>Lexical-triggered Daily Scenarios</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Instruction-triggered Intervention</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Contextual Risk</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
+            <tr><td>Environmental Alarm</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
 
-  <div class="coming">
-    <strong>ICASSP 2027</strong><br>
-    Project page, benchmark data, code, and audio examples are coming soon.
-  </div>
+            <tr>
+              <td class="dim-cell" rowspan="3">User Interruption</td>
+              <td class="trials-cell" rowspan="3">240</td>
+              <td>Keyword / Semantic-point Interruption</td>
+              <td><span class="cond-badge cond-no_explicit">No-explicit</span></td>
+            </tr>
+            <tr><td>Topic-switch Interruption</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
+            <tr><td>Environmental Alarm</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
 
+            <tr>
+              <td class="dim-cell" rowspan="6">Interruption Resistance</td>
+              <td class="trials-cell" rowspan="6">280</td>
+              <td>Narration</td>
+              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
+            </tr>
+            <tr><td>Broadcast</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
+            <tr><td>Presentation</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
+            <tr><td>User Backchannels</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Simultaneous Interpretation</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Collaborative Singing</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+
+            <tr>
+              <td class="dim-cell" rowspan="6">Active Silence</td>
+              <td class="trials-cell" rowspan="6">160</td>
+              <td>Silent Observation</td>
+              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
+            </tr>
+            <tr><td>Retreat</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
+            <tr><td>Recording Studio</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
+            <tr><td>Sleeping Baby</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Focused Driving</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Library</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+
+            <tr>
+              <td class="dim-cell" rowspan="2">Proactive Initiation</td>
+              <td class="trials-cell" rowspan="2">160</td>
+              <td>Social Icebreaking</td>
+              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
+            </tr>
+            <tr><td>Environmental Alarm</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
+
+            <tr>
+              <td class="dim-cell" rowspan="6">Agent Backchannel</td>
+              <td class="trials-cell" rowspan="6">210</td>
+              <td>Crosstalk / Penggen</td>
+              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
+            </tr>
+            <tr><td>Semantic Category Trigger</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Correction Update</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Process Step Tracking</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Lexical / Numeric Triggers</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
+            <tr><td>Natural Daily Conversation</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="section-lead" style="margin-top: 0.9rem;">
+        Simultaneous interpretation and collaborative singing are the two In-session Interruption Resistance settings reported separately in the results.
+        The Pre-session backchannel subset uses revised Chinese crosstalk (<em>xiangsheng</em>) dialogue; the No-explicit subset is drawn from channel-separated otoSpeech conversations in which one channel contains only backchannels.
+      </p>
+    </section>
+
+    <section class="section" id="protocol">
+      <h2>Evaluation Protocol</h2>
+      <p class="section-lead">
+        Each trial is scored on content quality and timing appropriateness.
+        <strong>Behavioral Correctness Rate (BCR)</strong> is the fraction of trials whose Content score is at least 2.5 and that also meet the Timing criterion.
+        Active Silence is scored by its silence criterion alone. User Interruption BCR is computed only on valid trials, where the agent is speaking when the interruption arrives.
+      </p>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <i class="fas fa-clipboard-check"></i>
+          <h3>Content (0–5)</h3>
+          <p>
+            A GPT-4o judge scores Semantic Fulfillment (0–2), Constraint Adherence (0–1), and Contextual Consistency (0–1) from the transcript.
+            AnyAudio-Judge scores Prosodic Appropriateness (0–1) against the intended emotion or speaking style.
+            Content is not applied to Active Silence.
+          </p>
+        </div>
+        <div class="metric-card">
+          <i class="fas fa-stopwatch"></i>
+          <h3>Timing</h3>
+          <p>
+            Success criteria are behavior-specific. Latency <em>L</em> is defined per behavior; failed trials are assigned the corresponding evaluation interval, so reported latency is not an average over successes alone.
+          </p>
+        </div>
+        <div class="metric-card">
+          <i class="fas fa-wave-square"></i>
+          <h3>Backchannel alignment</h3>
+          <p>
+            Backchannel trials are split into 1-second windows. After Gaussian smoothing (σ = 1.0&nbsp;s), timing is the Backchannel Alignment Score between the model’s opportunity map and the reference map.
+          </p>
+        </div>
+      </div>
+      <div class="table-wrap" style="margin-top: 1.25rem;">
+        <table class="demo-table taxonomy-table">
+          <thead>
+            <tr>
+              <th>Behavior</th>
+              <th>Timing success</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dim-cell">Agent Interruption</td>
+              <td>The first semantically valid interruption falls after the earliest valid point and before the user audio ends. <em>L</em> is its offset from the scenario reference event.</td>
+            </tr>
+            <tr>
+              <td class="dim-cell">User Interruption</td>
+              <td>On valid trials only: yield inside the yield interval and start a semantically valid response inside the response interval. <em>L</em> = <em>L</em><sub>yield</sub> + <em>L</em><sub>resp</sub>.</td>
+            </tr>
+            <tr>
+              <td class="dim-cell">Interruption Resistance</td>
+              <td>Maintain the ongoing activity, or meet the scenario’s recovery requirement, under non-disruptive input. Interpretation and singing use onset offset; other continuous activities use the stop-to-restart gap.</td>
+            </tr>
+            <tr>
+              <td class="dim-cell">Active Silence</td>
+              <td>Remain silent throughout the annotated evaluation interval.</td>
+            </tr>
+            <tr>
+              <td class="dim-cell">Proactive Initiation</td>
+              <td>The first semantically valid proactive utterance falls inside the annotated valid region. The reference is trial onset for Pre-session scenarios and the contextual trigger for No-explicit scenarios.</td>
+            </tr>
+            <tr>
+              <td class="dim-cell">Agent Backchannel</td>
+              <td>Alignment of 1-second windows against predefined positions (Pre-session and In-session) or dataset backchannels plus additional annotators (No-explicit otoSpeech).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="paper-figure" style="margin-top: 1.25rem;">
+        <img src="images/backchannel.jpeg" alt="Backchannel timing annotations on a No-explicit otoSpeech trial" />
+        <figcaption>
+          Backchannel timing annotations for a No-explicit otoSpeech trial.
+          Green marks dataset-provided annotations. Blue, orange, and purple mark additional opportunities labeled by Qwen3.8-Omni-Flash-Realtime, Doubao-Seed-2.1-Lite, and MiniCPM-o 4.5.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="results">
+      <h2>Results</h2>
+      <p class="section-lead">
+        Twelve systems are evaluated under one streaming protocol: seven deployed locally and five reached through remote APIs.
+        Trials without a profile use the same generic instruction where the system supports it.
+        “—” means the setting was not evaluated, not a score of zero. Bold marks the highest reported BCR in that column.
+        P / I / N are Pre-session, In-session, and No-explicit. <em>I</em><sub>Int.</sub> and <em>I</em><sub>Sing.</sub> are the In-session simultaneous-interpretation and collaborative-singing scenarios.
+      </p>
+      <div class="table-wrap">
+        <table class="demo-table bcr-table" aria-label="Behavioral Correctness Rate">
+          <thead>
+            <tr>
+              <th rowspan="2">System</th>
+              <th rowspan="2">Lang.</th>
+              <th colspan="3">Agent Interruption</th>
+              <th>User Interruption</th>
+              <th colspan="4">Interruption Resistance</th>
+              <th colspan="2">Active Silence</th>
+              <th colspan="2">Proactive Initiation</th>
+              <th colspan="3">Agent Backchannel</th>
+            </tr>
+            <tr>
+              <th>P</th><th>I</th><th>N</th>
+              <th>N</th>
+              <th>P</th><th><em>I</em><sub>Int.</sub></th><th><em>I</em><sub>Sing.</sub></th><th>N</th>
+              <th>P</th><th>I</th>
+              <th>P</th><th>N</th>
+              <th>P</th><th>I</th><th>N</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="group"><td colspan="17">Locally deployed systems</td></tr>
+            <tr><td>Freeze-Omni</td><td>en/zh</td><td>17.5</td><td>1.3</td><td>2.5</td><td>9.9</td><td>52.5</td><td>0.0</td><td>0.0</td><td>75.0</td><td class="best">88.8</td><td>5.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>1.3</td><td>0.0</td></tr>
+            <tr><td>MiniCPM-o 4.5</td><td>en/zh</td><td>28.8</td><td>8.8</td><td>2.5</td><td>24.8</td><td>67.5</td><td class="best">20.0</td><td>10.0</td><td>95.0</td><td>56.3</td><td>10.0</td><td>1.3</td><td>0.0</td><td>28.0</td><td>8.8</td><td>0.0</td></tr>
+            <tr><td>Moshi</td><td>en/zh</td><td>0.0</td><td>0.0</td><td>0.0</td><td>26.1</td><td>2.5</td><td>0.0</td><td>0.0</td><td>62.5</td><td>7.5</td><td>7.5</td><td class="best">35.0</td><td>0.0</td><td>—</td><td>12.5</td><td>13.8</td></tr>
+            <tr><td>PersonaPlex</td><td>en/zh</td><td>20.0</td><td>0.0</td><td>0.0</td><td>35.7</td><td>12.5</td><td>0.0</td><td>2.5</td><td>77.5</td><td>2.5</td><td>0.0</td><td>15.0</td><td>0.0</td><td>—</td><td>15.0</td><td>6.3</td></tr>
+            <tr><td>VITA-1.5</td><td>en</td><td>—</td><td>1.3</td><td>6.3</td><td>8.6</td><td>—</td><td>17.5</td><td>0.0</td><td>22.5</td><td>—</td><td>0.0</td><td>—</td><td>0.0</td><td>—</td><td class="best">25.0</td><td>0.0</td></tr>
+            <tr><td>Raon-SpeechChat</td><td>en</td><td>2.5</td><td>0.0</td><td>10.0</td><td>31.2</td><td>37.5</td><td>0.0</td><td>0.0</td><td>67.5</td><td>0.0</td><td>0.0</td><td class="best">35.0</td><td>0.0</td><td>—</td><td class="best">25.0</td><td class="best">40.0</td></tr>
+            <tr><td>DuplexCascade</td><td>en</td><td>—</td><td>0.0</td><td>2.5</td><td>7.3</td><td>—</td><td>0.0</td><td>0.0</td><td>27.5</td><td>—</td><td>2.5</td><td>—</td><td>0.0</td><td>—</td><td>15.0</td><td>1.3</td></tr>
+            <tr class="group"><td colspan="17">Systems accessed through remote APIs</td></tr>
+            <tr><td>Nemotron 3 VoiceChat</td><td>en</td><td class="best">50.0</td><td>0.0</td><td class="best">15.0</td><td>10.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>37.5</td><td>0.0</td><td>0.0</td><td>—</td><td>20.0</td><td>3.8</td></tr>
+            <tr><td>Qwen3.5-Omni</td><td>en/zh</td><td>18.8</td><td class="best">16.3</td><td>1.3</td><td>39.8</td><td>80.0</td><td>3.8</td><td>12.5</td><td>96.3</td><td>0.0</td><td>46.3</td><td>0.0</td><td class="best">8.8</td><td class="best">30.0</td><td>0.0</td><td>7.5</td></tr>
+            <tr><td>Grok Voice</td><td>en/zh</td><td>0.0</td><td>0.0</td><td>0.0</td><td>9.8</td><td>91.3</td><td>0.0</td><td>5.0</td><td class="best">100.0</td><td>10.0</td><td>0.0</td><td>0.0</td><td>0.0</td><td>4.0</td><td>0.0</td><td>0.0</td></tr>
+            <tr><td>GPT Realtime 2.1</td><td>en/zh</td><td>2.5</td><td>1.3</td><td>1.3</td><td class="best">47.6</td><td class="best">96.3</td><td>0.0</td><td>0.0</td><td class="best">100.0</td><td>38.8</td><td>3.8</td><td>0.0</td><td>0.0</td><td class="best">30.0</td><td>7.5</td><td>10.0</td></tr>
+            <tr><td>Gemini 2.5 Native Audio</td><td>en/zh</td><td>8.8</td><td>1.3</td><td>2.5</td><td>42.4</td><td>61.3</td><td>0.0</td><td class="best">30.0</td><td>71.3</td><td>76.3</td><td class="best">80.0</td><td>0.0</td><td>0.0</td><td>8.0</td><td>0.0</td><td>0.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="findings-grid" style="margin-top: 1.5rem;">
+        <div class="finding-card good">
+          <h3><i class="fas fa-check-circle"></i> Strongest slice: hold the floor</h3>
+          <p class="finding-stat">100% BCR</p>
+          <p>Under No-explicit Interruption Resistance, Grok Voice and GPT Realtime 2.1 both reach 100%. The same behavior drops to 20.0% for simultaneous interpretation and 30.0% for collaborative singing.</p>
+        </div>
+        <div class="finding-card bad">
+          <h3><i class="fas fa-times-circle"></i> Condition shifts break silence</h3>
+          <p class="finding-stat">88.8% → 5.0%</p>
+          <p>Freeze-Omni’s Active Silence BCR is 88.8% in Pre-session trials and 5.0% in In-session trials. Gemini 2.5 Native Audio stays high on both, at 76.3% and 80.0%.</p>
+        </div>
+        <div class="finding-card bad">
+          <h3><i class="fas fa-times-circle"></i> High content, low joint success</h3>
+          <p class="finding-stat">Content 4.12, BCR ≤ 2.5%</p>
+          <p>GPT Realtime 2.1 has the highest Agent Interruption content score (4.12), but its BCR is 2.5%, 1.3%, and 1.3% across Pre-session, In-session, and No-explicit.</p>
+        </div>
+        <div class="finding-card bad">
+          <h3><i class="fas fa-times-circle"></i> Proactive initiation stays rare</h3>
+          <p class="finding-stat">Best No-explicit BCR 8.8%</p>
+          <p>Only Qwen3.5-Omni exceeds zero on No-explicit Proactive Initiation. VITA-1.5 and DuplexCascade have the lowest latency (10.05&nbsp;s) but content scores of 0.48 and 0.49, and 0.0% BCR.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cases">
+      <h2>Case Study</h2>
+      <p class="section-lead">
+        Appropriate full-duplex behavior depends on when an agent speaks, what it says, and whether it should speak at all.
+      </p>
+      <figure class="paper-figure">
+        <img src="images/cases.jpg" alt="Case studies of Agent Interruption and Active Silence" />
+        <figcaption>
+          Agent Interruption (top) and Active Silence (bottom). Each pair compares systems on the same trial.
+          The top pair meets the Timing criterion but differs in how fully the intervention addresses the task.
+          The bottom pair contrasts speaking with correctly withholding speech.
+        </figcaption>
+      </figure>
+      <p>
+        In the hiring-review trial, both MiniCPM-o and Nemotron meet the Timing criterion.
+        MiniCPM-o directly challenges the use of marriage and pregnancy plans as hiring considerations and explains why they are inappropriate.
+        Nemotron gives a more generic refusal and then redirects the discussion to job-related factors.
+        Their transcript-based content subtotals are 4/4 and 3/4.
+      </p>
+      <p>
+        In the listening-exam trial, Freeze-Omni remains silent.
+        Qwen-Omni responds during intervals in which no response is expected.
+        The response is relevant to the immediate context, but speaking itself violates the participation requirement.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 DuplexAct-Bench · Keyue Xing, Wentao Ding, Mengmeng Wang, Wenming Tu, Zilong Zheng, Yipeng Kang</p>
+    <p class="footer-note">
+      State Key Laboratory of General Artificial Intelligence, BIGAI · Peking University · X-LANCE Lab, Shanghai Jiao Tong University.
+      Supported by NSFC 62376031.
+      Page layout follows <a href="https://alitaxky.icu/ProAct-Bench/" target="_blank" rel="noopener">ProAct-Bench</a>.
+    </p>
+  </footer>
 </body>
 </html>
