@@ -278,6 +278,46 @@ code {
   color: #dc2626;
 }
 
+.finding-card.tone-iris {
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+}
+
+.finding-card.tone-amber {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.finding-card.tone-rose {
+  background: #fff1f2;
+  border-color: #fecdd3;
+}
+
+.finding-card.tone-teal {
+  background: #f0fdfa;
+  border-color: #99f6e4;
+}
+
+.finding-card.tone-iris h3,
+.finding-card.tone-iris .finding-stat {
+  color: #6d28d9;
+}
+
+.finding-card.tone-amber h3,
+.finding-card.tone-amber .finding-stat {
+  color: #b45309;
+}
+
+.finding-card.tone-rose h3,
+.finding-card.tone-rose .finding-stat {
+  color: #be123c;
+}
+
+.finding-card.tone-teal h3,
+.finding-card.tone-teal .finding-stat {
+  color: #0f766e;
+}
+
 .finding-stat {
   font-size: 1.35rem;
   font-weight: 700;
@@ -1024,12 +1064,15 @@ code {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 .fig-row figure {
   margin: 0;
   min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -1055,6 +1098,7 @@ code {
 }
 
 .fig-row figcaption {
+  flex: 1 0 auto;
   margin: 0.75rem 0 0;
   font-size: 0.84rem;
   color: #64748b;
