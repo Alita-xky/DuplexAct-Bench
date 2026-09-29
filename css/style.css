@@ -983,6 +983,10 @@ code {
   gap: 1rem;
 }
 
+.metrics-grid-two {
+  grid-template-columns: 1fr 1fr;
+}
+
 .metric-card {
   background: var(--surface);
   border-radius: var(--radius);
@@ -1020,21 +1024,20 @@ code {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 2.5rem;
+  gap: 2.25rem;
   margin: 0 auto;
-  max-width: 860px;
 }
 
 .fig-row figure {
   margin: 0;
-  flex: 0 1 380px;
-  max-width: 380px;
+  flex: 0 0 auto;
 }
 
 .fig-row img {
   display: block;
-  width: 100%;
-  height: auto;
+  height: 380px;
+  width: auto;
+  max-width: none;
   background: #fff;
   border-radius: 8px;
 }
@@ -1056,6 +1059,11 @@ code {
   .fig-row {
     flex-direction: column;
     align-items: center;
+  }
+
+  .fig-row img {
+    height: auto;
+    width: min(100%, 420px);
   }
 }
 
