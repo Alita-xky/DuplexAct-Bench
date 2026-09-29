@@ -34,7 +34,7 @@
         <a href="https://github.com/Alita-xky/DuplexAct-Bench" class="btn" target="_blank" rel="noopener">
           <i class="fab fa-github"></i> Code &amp; Data
         </a>
-        <a href="#taxonomy" class="btn btn-outline"><i class="fas fa-sitemap"></i> 6×30 Taxonomy</a>
+        <a href="#examples" class="btn btn-outline"><i class="fas fa-headphones"></i> Audio Examples</a>
         <a href="#results" class="btn btn-accent"><i class="fas fa-chart-bar"></i> Results</a>
       </div>
     </div>
@@ -57,12 +57,16 @@
     <section class="section" id="figures">
       <div class="fig-row">
         <figure>
-          <img src="images/behaviors.jpeg" alt="Representative examples of the six interaction behaviors" />
-          <figcaption>Figure 1: Six interaction behaviors under different contextual conditions.</figcaption>
+          <div class="fig-frame">
+            <img src="images/behaviors.jpeg" alt="Six interaction behaviors shown as user and agent timelines" />
+          </div>
+          <figcaption><strong>Figure 1.</strong> Six interaction behaviors. Each panel shows the user (blue) and agent (red) timelines under a Pre-session, In-session, or No-explicit condition.</figcaption>
         </figure>
         <figure>
-          <img src="images/taxonomy.png" alt="Behavior taxonomy wheel of DuplexAct-Bench" />
-          <figcaption>Figure 2: The inner ring shows six behavior families and the outer ring their scenarios. Segment numbers are trial counts, totaling 1,290. Red, blue, and black arcs mark Pre-session, In-session, and No-explicit.</figcaption>
+          <div class="fig-frame">
+            <img src="images/taxonomy.png" alt="Taxonomy wheel of six behavior families and their scenarios" />
+          </div>
+          <figcaption><strong>Figure 2.</strong> The inner ring lists the six behavior families and their trial counts. The outer ring lists the scenarios, 1,290 bilingual trials in total. Red, blue, and black arcs mark Pre-session, In-session, and No-explicit.</figcaption>
         </figure>
       </div>
     </section>
@@ -238,122 +242,13 @@
     </section>
 
 
-    <section class="section" id="taxonomy">
-      <h2>Benchmark Taxonomy: 6 Behaviors × 30 Scenarios</h2>
+    <section class="section" id="examples">
+      <h2>Audio Examples</h2>
       <p class="section-lead">
-        Scenario names follow the taxonomy figure. Arc colors mark Pre-session (red), In-session (blue), and No-explicit (black).
-        Trial counts are reported per behavior. Per-scenario speech examples are left for a later update.
+        Examples are grouped by behavior and condition: Pre-session, In-session, and No-explicit.
+        Each example plays the shared user input, one behaviorally correct system, and two systems that miss.
       </p>
-      <div class="table-wrap taxonomy-table-wrap">
-        <table class="demo-table taxonomy-table" aria-label="DuplexAct-Bench taxonomy">
-          <thead>
-            <tr>
-              <th>Behavior</th>
-              <th>Trials</th>
-              <th>Scenario</th>
-              <th>Condition</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="dim-cell" rowspan="7">Agent Interruption</td>
-              <td class="trials-cell" rowspan="7">240</td>
-              <td>Debate</td>
-              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
-            </tr>
-            <tr><td>Professional Consultation</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
-            <tr><td>Review / Oversight</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
-            <tr><td>Lexical-triggered Daily Scenarios</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Instruction-triggered Intervention</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Contextual Risk</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
-            <tr><td>Environmental Alarm</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
-
-            <tr>
-              <td class="dim-cell" rowspan="3">User Interruption</td>
-              <td class="trials-cell" rowspan="3">240</td>
-              <td>Keyword / Semantic-point Interruption</td>
-              <td><span class="cond-badge cond-no_explicit">No-explicit</span></td>
-            </tr>
-            <tr><td>Topic-switch Interruption</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
-            <tr><td>Environmental Alarm</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
-
-            <tr>
-              <td class="dim-cell" rowspan="6">Interruption Resistance</td>
-              <td class="trials-cell" rowspan="6">280</td>
-              <td>Narration</td>
-              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
-            </tr>
-            <tr><td>Broadcast</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
-            <tr><td>Presentation</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
-            <tr><td>User Backchannels</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Simultaneous Interpretation</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Collaborative Singing</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-
-            <tr>
-              <td class="dim-cell" rowspan="6">Active Silence</td>
-              <td class="trials-cell" rowspan="6">160</td>
-              <td>Silent Observation</td>
-              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
-            </tr>
-            <tr><td>Retreat</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
-            <tr><td>Recording Studio</td><td><span class="cond-badge cond-pre_session">Pre-session</span></td></tr>
-            <tr><td>Sleeping Baby</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Focused Driving</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Library</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-
-            <tr>
-              <td class="dim-cell" rowspan="2">Proactive Initiation</td>
-              <td class="trials-cell" rowspan="2">160</td>
-              <td>Social Icebreaking</td>
-              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
-            </tr>
-            <tr><td>Environmental Alarm</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
-
-            <tr>
-              <td class="dim-cell" rowspan="6">Agent Backchannel</td>
-              <td class="trials-cell" rowspan="6">210</td>
-              <td>Crosstalk / Penggen</td>
-              <td><span class="cond-badge cond-pre_session">Pre-session</span></td>
-            </tr>
-            <tr><td>Semantic Category Trigger</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Correction Update</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Process Step Tracking</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Lexical / Numeric Triggers</td><td><span class="cond-badge cond-in_session">In-session</span></td></tr>
-            <tr><td>Natural Daily Conversation</td><td><span class="cond-badge cond-no_explicit">No-explicit</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="section-lead" style="margin-top: 0.9rem;">
-        Simultaneous interpretation and collaborative singing are the two In-session Interruption Resistance settings reported separately in the results.
-        The Pre-session backchannel subset uses revised Chinese crosstalk (<em>xiangsheng</em>) dialogue; the No-explicit subset is drawn from channel-separated otoSpeech conversations in which one channel contains only backchannels.
-      </p>
-    </section>
-
-
-    <section class="section" id="cases">
-      <h2>Case Study</h2>
-      <p class="section-lead">
-        Appropriate full-duplex behavior depends on when an agent speaks, what it says, and whether it should speak at all.
-      </p>
-      <figure class="paper-figure">
-        <img src="images/cases.jpg" alt="Case studies of Agent Interruption and Active Silence" />
-        <figcaption>
-          Agent Interruption (top) and Active Silence (bottom). Each pair compares systems on the same trial.
-          The top pair meets the Timing criterion but differs in how fully the intervention addresses the task.
-          The bottom pair contrasts speaking with correctly withholding speech.
-        </figcaption>
-      </figure>
-      <p>
-        In the hiring-review trial, both MiniCPM-o and Nemotron meet the Timing criterion.
-        MiniCPM-o directly challenges the use of marriage and pregnancy plans as hiring considerations and explains why they are inappropriate.
-        Nemotron gives a more generic refusal and then redirects the discussion to job-related factors.
-        Their transcript-based content subtotals are 4/4 and 3/4.
-      </p>
-      <p>
-        In the listening-exam trial, Freeze-Omni remains silent.
-        Qwen-Omni responds during intervals in which no response is expected.
-        The response is relevant to the immediate context, but speaking itself violates the participation requirement.
-      </p>
+      <div id="examples-root"></div>
     </section>
   </main>
 
@@ -362,8 +257,8 @@
     <p class="footer-note">
       State Key Laboratory of General Artificial Intelligence, BIGAI · Peking University · X-LANCE Lab, Shanghai Jiao Tong University.
       Supported by NSFC 62376031.
-      Page layout follows <a href="https://alitaxky.icu/ProAct-Bench/" target="_blank" rel="noopener">ProAct-Bench</a>.
     </p>
   </footer>
+  <script src="js/examples.js"></script>
 </body>
 </html>
