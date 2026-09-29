@@ -16,7 +16,8 @@ function esc(text) {
 
 function audioBlock(src, label) {
   if (!src) return "";
-  return `<div class="ex-audio"><span>${esc(label)}</span><audio controls preload="none" src="${esc(src)}"></audio></div>`;
+  const caption = label ? `<span>${esc(label)}</span>` : "";
+  return `<div class="ex-audio">${caption}<audio controls preload="metadata" src="${esc(src)}"></audio></div>`;
 }
 
 function contextKind(item) {
@@ -64,7 +65,7 @@ function trialBlock(item, index, total) {
       <span class="ex-kicker">User</span>
       <p>${esc(userText)}</p>
       <div class="ex-user-row">
-        ${audioBlock(item.user_audio, "User speech")}
+        ${audioBlock(item.user_audio, "")}
         ${interrupt}
       </div>
     </div>
